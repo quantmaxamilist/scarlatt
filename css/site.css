@@ -459,7 +459,19 @@ h1,h2,h3{text-wrap:balance}
 /* property detail hero */
 .prop-hero{position:relative;min-height:84vh;display:flex;align-items:flex-end;overflow:hidden;background:var(--ink)}
 .prop-hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.prop-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,13,.35) 0%,rgba(11,11,13,.5) 45%,rgba(11,11,13,.92) 100%)}
+.prop-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,13,.35) 0%,rgba(11,11,13,.5) 45%,rgba(11,11,13,.92) 100%);pointer-events:none;z-index:1}
+/* hero image scroller (project pages) */
+.prop-hero[data-hero] img.bg{opacity:0;transition:opacity .7s ease}
+.prop-hero[data-hero] img.bg.on{opacity:1}
+.ph-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:4;width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,255,255,.32);background:rgba(10,10,12,.42);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);color:#fff;font-size:1.7rem;line-height:1;display:grid;place-items:center;cursor:pointer;opacity:0;transition:opacity .3s ease,background .2s ease,transform .2s ease}
+.prop-hero:hover .ph-arrow,.prop-hero:focus-within .ph-arrow{opacity:1}
+.ph-arrow:hover{background:var(--brand);border-color:var(--brand)}
+.ph-prev{left:26px}.ph-next{right:26px}
+.ph-prev:hover{transform:translateY(-50%) scale(1.07)}
+.ph-next:hover{transform:translateY(-50%) scale(1.07)}
+.ph-count{position:absolute;right:26px;bottom:26px;z-index:4;color:#fff;font-family:'Archivo',sans-serif;font-size:.82rem;letter-spacing:.12em;background:rgba(10,10,12,.42);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.22);border-radius:30px;padding:6px 14px}
+.ph-count b{color:var(--brand-l);font-weight:700}
+@media(max-width:900px){.ph-arrow{opacity:.9;width:44px;height:44px;font-size:1.4rem}.ph-prev{left:14px}.ph-next{right:14px}.ph-count{right:14px;bottom:16px}}
 .prop-hero .inner{position:relative;z-index:2;width:100%;max-width:1200px;margin:0 auto;padding:0 26px 56px;color:#fff}
 .prop-hero .crumb{color:#c9c6c4;font-size:.88rem;margin-bottom:12px}
 .prop-hero .crumb a:hover{color:var(--brand-l)}
