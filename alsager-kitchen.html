@@ -132,9 +132,11 @@
     dotsWrap.appendChild(b);
   });
   var dots=[].slice.call(dotsWrap.children);
-  function step(dir){ var w=slides[0].offsetWidth+18; track.scrollBy({left:dir*w,behavior:'smooth'}); }
-  prev.addEventListener('click',function(){step(-1);});
-  next.addEventListener('click',function(){step(1);});
+  function centerOf(s){ return s.offsetLeft-(track.clientWidth-s.offsetWidth)/2; }
+  function curIdx(){ var c=track.scrollLeft+track.clientWidth/2,best=0,bd=Infinity; slides.forEach(function(s,i){var sc=s.offsetLeft+s.offsetWidth/2,d=Math.abs(sc-c); if(d<bd){bd=d;best=i;}}); return best; }
+  function go(i){ i=Math.max(0,Math.min(slides.length-1,i)); track.scrollTo({left:centerOf(slides[i]),behavior:'smooth'}); }
+  prev.addEventListener('click',function(){go(curIdx()-1);});
+  next.addEventListener('click',function(){go(curIdx()+1);});
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){
       es.forEach(function(e){ if(e.isIntersecting){ var idx=slides.indexOf(e.target); dots.forEach(function(d,i){d.classList.toggle('on',i===idx);}); } });
